@@ -34,7 +34,7 @@ var collegeSchema = new Schema({
     },
 
     credit_hours: {
-        type: String,
+        type: Number,
         required: true
     },
 
