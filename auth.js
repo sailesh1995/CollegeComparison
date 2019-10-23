@@ -8,3 +8,14 @@ module.exports = function(req, res, next) {
     next();
   }
 };
+
+module.exports.admin = function(req, res, next) {
+  console.log(req.user.admin);
+  if (!req.user.admin) {
+    let err = new Error("You are not authenticated! You are not admin");
+    err.status = 403;
+    return next(err);
+  } else {
+    next();
+  }
+};

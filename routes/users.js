@@ -39,16 +39,16 @@ router.post("/login", passport.authenticate("local"), (req, res) => {
   res.json(req.user);
 });
 
-// router.get("/logout", (req, res, next) => {
-//   if (req.user) {
-//     req.session.destroy();
-//     res.clearCookie("session-id");
-//     res.redirect("/");
-//   } else {
-//     let err = new Error("You are not logged in!");
-//     err.status = 403;
-//     next(err);
-//   }
-// });
+router.get("/logout", (req, res, next) => {
+  if (req.user) {
+    req.session.destroy();
+    res.clearCookie("session-id");
+    res.redirect("/");
+  } else {
+    let err = new Error("You are not logged in!");
+    err.status = 403;
+    next(err);
+  }
+});
 
 module.exports = router;

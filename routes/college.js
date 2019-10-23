@@ -1,5 +1,7 @@
 var express = require("express");
 var Colleges = require("../models/college");
+var auth = require("../auth");
+var verify = require("../verify");
 
 var router = express.Router();
 

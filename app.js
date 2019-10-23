@@ -8,6 +8,8 @@ var session = require("express-session");
 var passport = require("passport");
 var fileStore = require("session-file-store")(session);
 var Authenticate = require("./authenticate");
+var auth = require("./auth");
+var verify = require("./verify");
 var cors = require("cors");
 
 const url = "mongodb://localhost:27017/CollegeComparison";
@@ -42,15 +44,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.use(
-//   session({
-//     name: "session-id",
-//     secret: "secret-key",
-//     saveUninitialized: false,
-//     resave: false,
-//     store: new fileStore()
-//   })
-// );
+app.use(
+  session({
+    name: "session-id",
+    secret: "secret-key",
+    saveUninitialized: false,
+    resave: false,
+    store: new fileStore()
+  })
+);
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -71,10 +73,13 @@ function auth(req, res, next) {
   } 
 }
 
+
 app.use('*', cors());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
 app.use('/college', collegeRouter);
+app.use(verify.admin);
 app.use("/upload", uploadRouter);
 
 
