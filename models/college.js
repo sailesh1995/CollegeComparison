@@ -46,8 +46,11 @@ var collegeSchema = new Schema({
     Scholarship_criteria: {
         type: String,
         required: true
-    }
-
+    },
+    College_image:{
+        type: String,
+        required: false
+      }
 });
 
 var Colleges = mongoose.model("College", collegeSchema);
