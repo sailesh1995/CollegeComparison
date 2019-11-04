@@ -62,24 +62,24 @@ app.use('*', cors({
   credentials: true
 }));
 
-function auth(req, res, next) {
-  console.log(req.user);
-  if (!req.user) {
-    let err = new Error("You are not authenticated!");
-    err.status = 403;
-    return next(err);
-  } else {
-    next();
-  } 
-}
+// function auth(req, res, next) {
+//   console.log(req.user);
+//   if (!req.user) {
+//     let err = new Error("You are not authenticated!");
+//     err.status = 403;
+//     return next(err);
+//   } else {
+//     next();
+//   } 
+// }
 
 
 app.use('*', cors());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-
+// app.use(auth.user);
 app.use('/college', collegeRouter);
-app.use(verify.admin);
+
 app.use("/upload", uploadRouter);
 
 

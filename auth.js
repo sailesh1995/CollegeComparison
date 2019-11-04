@@ -1,4 +1,4 @@
-module.exports = function(req, res, next) {
+module.exports.user = function(req, res, next) {
   console.log(req.user);
   if (!req.user) {
     let err = new Error("You are not authenticated!");
